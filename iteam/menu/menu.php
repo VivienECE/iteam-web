@@ -9,13 +9,10 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#apropos">À PROPOS</a>
+            <a class="nav-link js-scroll-trigger" href="#apropos">QUI SOMMES NOUS</a>
             </li>
             <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#rejoins">REJOINS-NOUS</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#projets">PROJETS</a>
             </li>
             <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#events">ÉVENEMENTS</a>

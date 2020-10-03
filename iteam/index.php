@@ -1,5 +1,6 @@
 <?php
-include("db.php");    
+include("db.php");   
+include("forms.php"); 
 include("fonctions.php");
 include("header/header.php");
 contact_send_mail();
@@ -8,18 +9,34 @@ include("menu/menu.php");
  
 ?>
 
+<?php  
+
+
+$sql= "SELECT * FROM event_calendar WHERE id = 2";
+$result = query($sql);
+$row = fetch_array($result);
+$start_time = $row['start'];
+$end_time = $row['end'];
+$title = $row['title'];
+$description = $row['description'];
+
+
+
+?>
 
 
 <center>
 
-<div class="jumbotron">
-    
-<h1 class="display-4">Welcome to iTeam!</h1>
-<p class="lead">Nous sommes l'association promouvant l'informatique à l'ECE Paris.</p>
-<hr class="my-4">
-<p class="lead">
-    <a class="btn btn-warning btn-lg" href="#rejoins" role="button">REJOINS-NOUS</a>
-</p>
+<div class="jumbotron jumbotron bg-cover">
+    <div class="overlay"></div>
+        <div class="container text-white">
+    <br><br>
+        <h1 class="display-4">ASSOCIATION INFORMATIQUE DE L'ECE</h1>
+        <hr class="my-4">
+        <a class="btn btn-primary btn-lg" href="#rejoins" role="button">REJOINS-NOUS</a>
+
+        </div>
+    </div>
 </div>
 
 
@@ -27,50 +44,52 @@ include("menu/menu.php");
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto">
-                <h1>À PROPOS</h1>
+                <h1>QUI SOMMES NOUS ?</h1>
                 <hr>
-                <p>Crée en 1996, iTeam est une association spécialisée en informatique.           
+                <p>Crée en 1996, iTeam est l'association spécialisée en informatique de l'ECE Paris École d'Ingénieur.<br>
+                Tous les niveaux sont bienvenus, que tu sois débutant(e), intéressé(e) par le développement, ou motivé(e) pour te lancer dans de nouveaux projets. 
                 </p>
+
                 <div class="row">
                     <div class="col-sm-4">
-                        <div class="card text-white bg-warning mb-4">
-                            <div class="card-body">
-                                <h5 class="card-title">ENTRAIDE</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="card text-white bg-info mb-4">
+                        <div class="card text-white bg-dark mb-4">
                             <div class="card-body">
                                 <h5 class="card-title">PROJETS</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor.</p>
+                                <p class="card-text">
+                                ● Hackaton<br>
+                                ● Modding<br>
+                                ● Projets inter-association</p>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <div class="card text-white bg-success mb-4">
+                        <div class="card text-white bg-dark mb-4">
                             <div class="card-body">
-                                <h5 class="card-title">SUPPORTS</h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor.</p>
+                                <h5 class="card-title">TUTORAT</h5>
+                                <p class="card-text">
+                                ● Suivi des Projets Scolaires et Personnelles <br>
+                                ● Aides aux cours d'informatique<br>
+                                ● Supports techniques
+                                </p>
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-4">
+                        <div class="card text-white bg-dark mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">FORMATIONS</h5>
+                                <p class="card-text">
+                                ● Frameworks<br>
+                                ● Langages de Programmation<br>
+                                ● Linux</p>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
-        <div class="reseaux">
-            <a href="https://www.facebook.com/ITeamECEParis">
-            <img src="photos/fb.png" alt="">
-            </a>
-            <a href="https://www.instagram.com/iteam_ece/">
-            <img src="photos/insta.png" alt="">
-            </a>
-            <a href="https://www.linkedin.com/company/iteam-ece/">
-            <img src="photos/in.png" alt="">
-            </a>
-        </div>
-    </div>
+        
 </section>
 
 <section id="rejoins">
@@ -78,9 +97,9 @@ include("menu/menu.php");
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <h2>REJOINS-NOUS</h2>
-                <hr>
-                <img src="photos/bureau.png" alt="" style="width:90%" class="photo_bureau"><br><br>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                <hr><br><br>
+                <!--<img src="photos/bureau.png" alt="" style="width:90%" class="photo_bureau"><br><br>-->
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalLong">
                 REJOINDRE ITEAM
                 </button>
 
@@ -94,50 +113,25 @@ include("menu/menu.php");
                         </button>
                     </div>
                     
-                    <form id="member-form" method="post" role="form">
-                        <div class="modal-body">                       
-                            <input type="text" name="surname" id="nom" placeholder="Nom" required style="width:100%" ><br><br>
-                            <input type="text" name="name" id="prenom" placeholder="Prénom" required style="width:100%" ><br><br>
-                            <input type="date" name="date" id="date" placeholder="Date de Naissance" required style="float:left"><br><br>
-                            <input type="text" name="mail" id="email" placeholder="Adresse Mail" required style="width:100%" ><br><br>
-                            <input type="text" name="numero_adresse" id="numero_adresse" placeholder="N°" required style="width:10%">
-                            <input type="text" name="voie" id="voie" placeholder="Voie" required style="width:89%"><br><br>
-                            <input type="text" name="complement" id="complement" placeholder="Complément d'adresse" style="width:100%"><br><br>
-                            <input type="number" name="code_postal" id="code_postal" pattern="[0-9]{3,10}" placeholder="Code Postale" required style="width:50%; float:left"><br><br>
-                            <input type="text" name="ville" id="ville" placeholder="Ville" required style="width:100%"><br><br>
-                            <input type="text" name="pays" id="pays" placeholder="Pays" required style="width:100%"><br><br>
-                            <input type="tel" name="tel" id="tel" pattern="[0-9\s]{4,20}" placeholder="Téléphone" required style="width:70%; float:left" ><br><br>  
-                            <select id="classe" name="classe" required style="width:30%; float:left">
-                            <option value="ING1">ING1</option>
-                            <option value="ING2">ING2</option>
-                            <option value="ING3">ING3</option>
-                            <option value="ING4">ING4</option>
-                            <option value="ING5">ING5</option>
-                            </select><br><br>
-                            <input type="text" name="td" id="td" placeholder="TD" required style="width:30%; float:left" ><br><br>  
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" name="fermer" class="btn btn-secondary" data-dismiss="modal">FERMER</button>
-                            <input type="submit" name="inscrire" class="btn btn-primary" value="INSCRIRE">
-                        </div>
-                    </form>
+                    <?php
+                    inscription_form();
+                    ?>
                     </div>
                 </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<section id="projets">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <h2>NOS PROJETS</h2>
-                <hr>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
-            </div>
+    </div><br><br>
+    <div class="reseaux">
+            <a href="https://www.facebook.com/ITeamECEParis">
+            <img src="photos/fb.png" alt="">
+            </a>
+            <a href="https://www.instagram.com/iteam_ece/">
+            <img src="photos/insta.png" alt="">
+            </a>
+            <a href="https://www.linkedin.com/company/iteam-ece/">
+            <img src="photos/in.png" alt="">
+            </a>
         </div>
     </div>
 </section>
@@ -148,6 +142,14 @@ include("menu/menu.php");
             <div class="col-lg-8 mx-auto">
                 <h2>NOS EVENTS</h2>
                 <hr>
+                <div class="count">
+                    <br><br>
+                    <h3>PROCHAIN EVENT 
+                        <hr class="my-4">
+                    <?php echo $title ?></h3><br>
+                    <h2><p id="countdown"></p></h2><br><br>
+                </div><br>
+                <a class="btn btn-dark btn-md" href="calendar/calendar.php" role="button">VOIR TOUS NOS EVENTS</a>
                 
             </div>
         </div>
@@ -223,7 +225,7 @@ include("menu/menu.php");
                             <div class="col-md-6">
                                 <div class="wsk-cp-product">
                                     <div class="wsk-cp-img">
-                                    <img src="photos/noube.jpg" alt="Product" class="img-responsive"/>
+                                    <img src="photos/rnoube.jpg" alt="Product" class="img-responsive"/>
                                     </div>
                                     <div class="wsk-cp-text">
                                         <div class="category">
@@ -278,7 +280,7 @@ include("menu/menu.php");
                             <div class="col-md-6">
                                 <div class="wsk-cp-product">
                                     <div class="wsk-cp-img">
-                                    <img src="photos/huber.jpg" alt="Product" class="img-responsive"/>
+                                    <img src="photos/kenny.jpg" alt="Product" class="img-responsive"/>
                                     </div>
                                     <div class="wsk-cp-text">
                                         <div class="category">
@@ -303,7 +305,7 @@ include("menu/menu.php");
                             <div class="col-md-6">
                                 <div class="wsk-cp-product">
                                     <div class="wsk-cp-img">
-                                    <img src="photos/bouhnik.jpg" alt="Product" class="img-responsive"/>
+                                    <img src="photos/rbouhnik.jpg" alt="Product" class="img-responsive"/>
                                 </div>
                                 <div class="wsk-cp-text">
                                     <div class="category">
@@ -389,7 +391,7 @@ include("menu/menu.php");
                     <input type="text" name="prenom" placeholder="Prénom"style="width:40%" required><br><br>
                     <input type="text" name="email" placeholder="Adresse Mail ECE (xxx@edu.ece.fr)"style="width:80%" required><br><br>
                     <textarea name="message" id="message" placeholder="Message" style="width:80%" required></textarea><br><br>
-                    <button type="submit" class="btn btn-primary" name="envoyer">ENVOYER</button>
+                    <button type="submit" class="btn btn-dark" name="envoyer">ENVOYER</button>
                     
                 </form>
 
@@ -401,7 +403,39 @@ include("menu/menu.php");
 </center>
 
 
-<?php  
 
+
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("<?php echo $start_time; ?>").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="countdown"
+  document.getElementById("countdown").innerHTML = days + " Jours " + hours + " Heures "
+  + minutes + " Minutes " + seconds + " Secondes ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "Event à déja commencé";
+  }
+}, 1000);
+</script>
+
+<?php
 include("footer/footer.php");
 ?>

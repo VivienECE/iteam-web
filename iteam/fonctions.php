@@ -59,7 +59,6 @@ $mail->SMTPOptions = array('ssl' =>
     $mail->AltBody = 'Contenu au format texte pour les clients e-mails qiui ne le supportent pas'; // ajout facultatif de texte sans balises HTML (format texte)
 
     $mail->send();
-    set_message("<br><br>Le message a été envoyé avec succèes! iTeam vous recontactera très rapidement!", "success");
   
   }
   // si le try ne marche pas > exception ici
@@ -107,11 +106,11 @@ function contact_send_mail()
         }
         $email = "iteam.bureau@gmail.com";
         $subject = "Message site iTeam";
-        $message = "Etudiant: $nom $prenom\n\n
+        $message = "Etudiant: $nom $prenom<br><br>
         
                     Message: $message_site";
     
-        $headers = "From: $mail_site";
+        $headers = "$mail_site";
     
     
         send_mail($headers, $subject, $message, $email);
@@ -192,11 +191,40 @@ function add_member()
         $sql = "INSERT INTO membres(nom, prenom, date, email, num_adresse, voie, complement, code_postal, ville, pays, tel, classe, td, statut)";
         $sql.= " VALUES('$nom','$prenom', '$date', '$email','$numero_adresse','$voie', '$complement', '$code', '$ville', '$pays', '$tel', '$classe', '$td', '0')";
         $result = query($sql);
-        redirect("paiement.php");
-        set_message("<br><br>Le message a été envoyé avec succèes! iTeam vous recontactera très rapidement!", "success");
+        set_message("<br><br>Merci d'avoir fait confiance à l'iTeam. Un mail sera envoyé pour finaliser l'inscription !", "success");
+
+        $pumpkin_url = "https://billetterie.pumpkin-app.com/inscriptipn-iteam";
+
+        $header = "noreply@iteam.fr";
+        $subject = "Finalisation de l'inscription iTeam";
+        $contenu = "
+        <p>Bonjour $prenom,<br><br>
+        Bienvenue dans la famille de l'iTeam.<br>
+        Pour finaliser ton inscription, il faut payer ta cotisation annuelle de 10,00€ pour l'année scolaire 2020-2021 via :<br>
+            - Pumpkin : $pumpkin_url<br>
+            - Espèces : en retrouvant un membre de l'iTeam à l'ECE<br>
+            - CB : en retrouvant un membre de l'iTeam à l'ECE<br><br>
+
+        Une fois ton paiement effectué, tu recevras un mail de confirmation.<br>
+        Dans le cas échant, contactez le bureau : iteam.bureau@gmail.com<br><br>
+        
+        N'oubliez pas de nous retrouver sur nos pages de réseaux sociaux :<br>
+            - Facebook : https://www.facebook.com/ITeamECEParis<br>
+            - Instagram : https://www.instagram.com/iteamece/<br><br>
+
+        A bientôt,<br><br>
+
+        L'équipe iTeam</p>
+
+        ";
+
+
+        send_mail($header, $subject, $contenu, $email);
 
     }  
 }
+
+
 
 
 
