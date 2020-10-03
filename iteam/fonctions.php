@@ -27,7 +27,6 @@ $mail->SMTPOptions = array('ssl' =>
     /* DONNEES SERVEUR */
     #####################
     $mail->setLanguage('fr', '../PHPMailer/language/');   // pour avoir les messages d'erreur en FR
-    $mail->SMTPDebug = 2;            // en production (sinon "2")
     //$mail->SMTPDebug = 2;            // décommenter en mode débug
     $mail->isSMTP();                                                            // envoi avec le SMTP du serveur
     $mail->Host       = 'smtp.gmail.com';                            // serveur SMTP
@@ -66,6 +65,7 @@ $mail->SMTPOptions = array('ssl' =>
     echo "Le Message n'a pas été envoyé. Mailer Error: {$mail->ErrorInfo}"; // Affiche l'erreur concernée le cas échéant
     set_message("<br><br>Le message n'a pas été envoyé", "error");
   }  
+  //set_message("<br><br>Message envoyé", "info");
   return false;
 } // fin de la fonction sendmail
 
