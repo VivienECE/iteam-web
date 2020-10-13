@@ -12,7 +12,7 @@ include("menu/menu.php");
 <?php  
 
 
-$sql= "SELECT * FROM event_calendar WHERE id = 2";
+$sql= "SELECT * FROM event_calendar WHERE id = 3";
 $result = query($sql);
 $row = fetch_array($result);
 $start_time = $row['start'];
@@ -183,7 +183,7 @@ $description = $row['description'];
                                         <p>ING4 SE - Promotion 2022</p>
                                             <div class="linkedin_logo">
                                             <center>
-                                                <a href="#">
+                                                <a href="https://www.linkedin.com/in/praveen-de-silva-8b37a1196/">
                                                 <img src="photos/linkedin_bureau.png" alt="" style="width:10%">
                                                 </a>
                                             </center>
@@ -238,7 +238,7 @@ $description = $row['description'];
                                         <p>ING4 Énergie - Promotion 2022</p>
                                             <div class="linkedin_logo">
                                             <center>
-                                                <a href="#">
+                                                <a href="https://www.linkedin.com/in/raoul-noube-tiako-006a9a197/">
                                                 <img src="photos/linkedin_bureau.png" alt="" style="width:10%">
                                                 </a>
                                             </center>
@@ -263,7 +263,7 @@ $description = $row['description'];
                                     <p>ING4 SI - Promotion 2022</p>
                                     <div class="linkedin_logo">
                                         <center>
-                                            <a href="#">
+                                            <a href="https://www.linkedin.com/in/vivien-detournay-b8789b120/">
                                             <img src="photos/linkedin_bureau.png" alt="" style="width:10%">
                                             </a>
                                         </center>
@@ -293,7 +293,7 @@ $description = $row['description'];
                                         <p>ING4 Finance - Promotion 2022</p>
                                             <div class="linkedin_logo">
                                             <center>
-                                                <a href="#">
+                                                <a href="https://www.linkedin.com/in/kenny-huber-b2053484/">
                                                 <img src="photos/linkedin_bureau.png" alt="" style="width:10%">
                                                 </a>
                                             </center>
@@ -318,7 +318,7 @@ $description = $row['description'];
                                     <p>ING4 SI - Promotion 2022</p>
                                         <div class="linkedin_logo">
                                         <center>
-                                            <a href="#">
+                                            <a href="https://fr.linkedin.com/in/raphaël-bouhnik-6322901aa">
                                             <img src="photos/linkedin_bureau.png" alt="" style="width:10%">
                                             </a>
                                         </center>
@@ -431,7 +431,7 @@ var x = setInterval(function() {
   // If the count down is over, write some text 
   if (distance < 0) {
     clearInterval(x);
-    document.getElementById("countdown").innerHTML = "Event à déja commencé";
+    document.getElementById('countdown').innerHTML = "Event a déja commencé";
   }
 }, 1000);
 </script>

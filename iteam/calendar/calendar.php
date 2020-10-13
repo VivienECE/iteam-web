@@ -2,6 +2,8 @@
 <html>
 <head>
     <meta charset='utf-8' />
+    <title>iTeam - Events</title>
+  <link rel="icon" type="image/png" href="../photos/logobar.png" />
     <link href='fullcalendar/packages/core/main.css' rel='stylesheet' />
     <link href='fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
     <link href='fullcalendar/packages/timegrid/main.css' rel='stylesheet' />

@@ -65,7 +65,6 @@ $mail->SMTPOptions = array('ssl' =>
     echo "Le Message n'a pas été envoyé. Mailer Error: {$mail->ErrorInfo}"; // Affiche l'erreur concernée le cas échéant
     set_message("<br><br>Le message n'a pas été envoyé", "error");
   }  
-  //set_message("<br><br>Message envoyé", "info");
   return false;
 } // fin de la fonction sendmail
 
@@ -106,7 +105,8 @@ function contact_send_mail()
         }
         $email = "iteam.bureau@gmail.com";
         $subject = "Message site iTeam";
-        $message = "Etudiant: $nom $prenom<br><br>
+        $message = "Etudiant: $nom $prenom<br>
+        			Mail : $mail_site<br><br>
         
                     Message: $message_site";
     
@@ -196,11 +196,13 @@ function add_member()
         $pumpkin_url = "https://billetterie.pumpkin-app.com/inscriptipn-iteam";
 
         $header = "noreply@iteam.fr";
+    	//Caractères spéciaux / € ne marche pas
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
         $subject = "Finalisation de l'inscription iTeam";
         $contenu = "
         <p>Bonjour $prenom,<br><br>
         Bienvenue dans la famille de l'iTeam.<br>
-        Pour finaliser ton inscription, il faut payer ta cotisation annuelle de 10,00€ pour l'année scolaire 2020-2021 via :<br>
+        Pour finaliser ton inscription, il faut payer ta cotisation annuelle de 10,00 euros pour l'année scolaire 2020-2021 via :<br>
             - Pumpkin : $pumpkin_url<br>
             - Espèces : en retrouvant un membre de l'iTeam à l'ECE<br>
             - CB : en retrouvant un membre de l'iTeam à l'ECE<br><br>
@@ -218,10 +220,64 @@ function add_member()
 
         ";
 
-
-        send_mail($header, $subject, $contenu, $email);
+		//utf8_decode()->Caractères spéciaux
+        send_mail($header, utf8_decode($subject), utf8_decode($contenu), $email);
 
     }  
+}
+
+
+function confirm_member()
+{
+    
+    $requete= "SELECT * FROM membres WHERE statut = 0";
+    $resultat = query($requete);
+    while ($ligne = $resultat -> fetch_assoc()) 
+    {
+        echo 'ID: ' . $ligne['id_membre'] . ' Nom: ' . $ligne['nom'] . ' Prénom: ' . $ligne['prenom'] . ' Email: ' . $ligne['email'] . ' Téléphone: ' . $ligne['tel'] . ' Classe: ' . $ligne['classe'] . ' TD: ' . $ligne['td'] . ' ';
+        echo "<br>";
+       
+    }
+
+    if(isset($_POST['button_regle']))
+    {
+        if (isset($_POST['id'])) 
+        {
+            $id = $_POST['id'];
+        }
+
+        $sql= "UPDATE membres SET statut=1 WHERE id_membre=$id";
+        $result = query($sql);
+
+
+        $sql1= "SELECT * FROM membres WHERE id_membre=$id";
+        $result1 = query($sql1);
+        $row = fetch_array($result1);
+        $nom = $row['nom'];
+        $prenom = $row['prenom'];
+        $mail = $row['email'];
+
+      	//Caractères spéciaux / € ne marche pas
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+        $header = "noreply@iteam.fr";
+        $subject = "Confirmation de l'inscription iTeam";
+        $contenu = "
+        <p>Bonjour $prenom,<br><br>
+        Ta cotisation de 10€ est bien reçue. Tu es bien inscrit(e) en tant que membre chez iTeam et nous te remercions.<br>
+        Nous espérons que tu vas passer une agréable année avec iTeam.<br><br>
+        Pour plus d’informations, n’hésites pas à nous contacter.<br><br>
+
+        A bientôt,<br><br>
+
+        L'équipe iTeam</p>
+
+        ";
+
+
+        send_mail($header, utf8_decode($subject), utf8_decode($contenu), $mail);
+
+        redirect("manageadminpage.php");
+    }
 }
 
 

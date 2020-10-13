@@ -1,6 +1,6 @@
 <?php
 
-$con = mysqli_connect('localhost', 'root', '', 'iteam');
+$con = mysqli_connect('db5001002525.hosting-data.io', 'dbu855112', 'iTeam_2020', 'dbs868559');
 
 function row_count($result)
 {

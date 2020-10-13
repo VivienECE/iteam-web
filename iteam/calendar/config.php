@@ -28,10 +28,10 @@ Released: 2020-06-12
 ###########################################################
 
 /* Define MySQL connection details and database table name */
-$SETTINGS["mysql_user"]='root';
-$SETTINGS["mysql_pass"]='';
-$SETTINGS["hostname"]='localhost';
-$SETTINGS["mysql_database"]='iteam';
+$SETTINGS["mysql_user"]='dbu855112';
+$SETTINGS["mysql_pass"]='iTeam_2020';
+$SETTINGS["hostname"]='db5001002525.hosting-data.io';
+$SETTINGS["mysql_database"]='dbs868559';
 $SETTINGS["data_table"]='event_calendar';
 
 /* Connect to MySQL */
